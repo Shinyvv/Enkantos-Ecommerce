@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Cinzel", "Times New Roman", serif;
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+
+  --color-background: #050505;
+  --color-foreground: #f5f5f5;
+  --color-card: #0f0f0f;
+  --color-card-foreground: #ffffff;
+  --color-popover: #0b0b0b;
+  --color-popover-foreground: #ffffff;
+  --color-muted: #151515;
+  --color-muted-foreground: #a3a3a3;
+  --color-border: #2a2a2a;
+  --color-input: #ffffff;
+  --color-ring: #d4af37;
+
+  --color-gold: #d4af37;
+  --color-gold-soft: #e4c86a;
+  --color-gold-muted: #8c7530;
+
+  --color-whatsapp: #25d366;
+  --color-facebook: #1877f2;
+  --color-instagram-start: #f58529;
+  --color-instagram-end: #dd2a7b;
+
+  --radius: 0.75rem;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(212, 175, 55, 0.12), transparent 30%),
+    radial-gradient(circle at 90% 0%, rgba(212, 175, 55, 0.09), transparent 30%),
+    #050505;
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  word-spacing: 0.08em;
+  font-kerning: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.025em;
+  word-spacing: 0.1em;
+  line-height: 1.2;
+}
+
+p,
+a,
+button,
+input,
+textarea,
+label {
+  letter-spacing: 0.008em;
+  word-spacing: 0.06em;
+}
+
+a {
+  color: inherit;
+}
+
+.bg-instagram {
+  background: linear-gradient(135deg, var(--color-instagram-start), var(--color-instagram-end));
+}
+
+.bg-whatsapp {
+  background-color: var(--color-whatsapp);
+}
+
+.bg-facebook {
+  background-color: var(--color-facebook);
+}
+
+.gold-glow {
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.45), 0 14px 35px -18px rgba(212, 175, 55, 0.7);
+}
+
+.texture-overlay {
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.fashion-masonry {
+  column-count: 2;
+  column-gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .fashion-masonry {
+    column-count: 4;
+    column-gap: 1rem;
+  }
+}
+
+.fashion-masonry-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
