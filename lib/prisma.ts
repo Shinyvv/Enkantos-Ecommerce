@@ -3,20 +3,23 @@ import { PrismaPg } from "@prisma/adapter-pg"
 
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient }
 const connectionString = process.env.DATABASE_URL
+const isDatabaseDisabled = process.env.DISABLE_DATABASE === "true" || !connectionString
 
-if (!connectionString) {
-  throw new Error("DATABASE_URL no esta definida en .env")
-}
-
-const adapter = new PrismaPg({ connectionString })
-
-export const prisma =
+const prismaClient =
   globalForPrisma.prisma ??
-  new PrismaClient({
-    adapter,
-    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"]
-  })
+  (isDatabaseDisabled
+    ? (new Proxy({} as PrismaClient, {
+        get() {
+          throw new Error("DATABASE_URL no esta definida o la base de datos esta deshabilitada")
+        }
+      }) as PrismaClient)
+    : new PrismaClient({
+        adapter: new PrismaPg({ connectionString }),
+        log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"]
+      }))
+
+export const prisma = prismaClient
 
 if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma
+  globalForPrisma.prisma = prismaClient
 }
